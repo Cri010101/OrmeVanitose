@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Preview Orologi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Mono:wght@500&family=Orbitron:wght@700;900&family=Rajdhani:wght@600&family=Bebas+Neue&family=Oxanium:wght@700&family=Russo+One&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #fff; padding: 40px 24px; }
+
+h2 { color: #888; font-size: 0.72em; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+.section { margin-bottom: 40px; }
+
+.bar {
+    background: linear-gradient(135deg, #1a2a3a 0%, #243447 100%);
+    padding: 7px 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    border-radius: 8px;
+}
+.server { font-size: 0.82em; color: rgba(255,255,255,0.7); font-weight: 700; }
+
+/* 1 — Digitale LCD ciano */
+.clock-1 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.3em;
+    color: #00e5ff;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px rgba(0,229,255,0.6), 0 0 20px rgba(0,229,255,0.3);
+}
+
+/* 2 — Pill dorata */
+.clock-2 {
+    font-size: 0.85em;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: rgba(255,204,0,0.12);
+    color: #ffcc00;
+    border: 1px solid rgba(255,204,0,0.35);
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+/* 3 — Minimal monospaziato separatori dorati */
+.clock-3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 1px;
+}
+.clock-3 .sep { color: rgba(255,204,0,0.7); margin: 0 1px; }
+
+/* 4 — Blocchi separati con sfondo vetro */
+.clock-4 { display: flex; align-items: center; gap: 4px; font-size: 0.78em; }
+.clock-4 .digit {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.clock-4 .colon { color: #ffcc00; font-weight: 900; font-size: 1.1em; margin-bottom: 1px; }
+
+/* 5 — Orbitron sci-fi */
+.clock-5 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05em;
+    font-weight: 900;
+    color: #ffcc00;
+    letter-spacing: 4px;
+    text-shadow: 0 0 12px rgba(255,204,0,0.4);
+}
+
+/* 6 — Cartellone flip */
+.clock-6 { display: flex; align-items: center; gap: 3px; }
+.clock-6 .card {
+    background: #0f1e2e;
+    border: 1px solid rgba(255,204,0,0.2);
+    border-radius: 5px;
+    padding: 3px 9px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5em;
+    color: #ffcc00;
+    line-height: 1;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.4);
+    min-width: 34px;
+    text-align: center;
+}
+.clock-6 .dot { color: rgba(255,204,0,0.5); font-size: 1.2em; font-weight: 900; margin-bottom: 2px; }
+
+/* 7 — Con etichette ore/min/sec */
+.clock-7 { display: flex; align-items: flex-end; gap: 6px; }
+.clock-7 .unit { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.clock-7 .num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+.clock-7 .lbl { font-size: 0.45em; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,204,0,0.6); }
+.clock-7 .sep { color: rgba(255,255,255,0.2); font-size: 1.1em; margin-bottom: 8px; }
+
+/* 8 — Neon bar ciano */
+.clock-8 {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #fff;
+    position: relative;
+    padding: 4px 16px;
+    border-top: 1px solid rgba(0,229,255,0.4);
+    border-bottom: 1px solid rgba(0,229,255,0.4);
+    text-shadow: 0 0 10px rgba(0,229,255,0.7);
+}
+.clock-8::before, .clock-8::after {
+    content: '';
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #00e5ff;
+    box-shadow: 0 0 6px #00e5ff;
+}
+.clock-8::before { left: 4px; }
+.clock-8::after  { right: 4px; }
+
+/* 9 — Bordo sinistro dorato */
+.clock-9 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.95em;
+    letter-spacing: 2px;
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid #ffcc00;
+    padding: 4px 12px 4px 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+/* 10 — Orbitron con due punti lampeggianti */
+.clock-10 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+}
+.clock-10 .colon {
+    color: #ffcc00;
+    animation: blink 1s step-end infinite;
+    margin: 0 1px;
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.1; }
+}
+</style>
+</head>
+<body>
+
+<div class="section">
+  <h2>1</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-1" id="c1">00:00:00</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>2</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-2" id="c2">00:00:00</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>3</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-3">
+      <span class="h">00</span><span class="sep">:</span><span class="m">00</span><span class="sep">:</span><span class="s">00</span>
+    </span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>4</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-4">
+      <span class="digit" id="c4h">00</span><span class="colon">:</span>
+      <span class="digit" id="c4m">00</span><span class="colon">:</span>
+      <span class="digit" id="c4s">00</span>
+    </span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>5</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-5" id="c5">00:00:00</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>6</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-6">
+      <span class="card" id="c6h">00</span><span class="dot">:</span>
+      <span class="card" id="c6m">00</span><span class="dot">:</span>
+      <span class="card" id="c6s">00</span>
+    </span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>7</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-7">
+      <span class="unit"><span class="num" id="c7h">00</span><span class="lbl">ore</span></span>
+      <span class="sep">|</span>
+      <span class="unit"><span class="num" id="c7m">00</span><span class="lbl">min</span></span>
+      <span class="sep">|</span>
+      <span class="unit"><span class="num" id="c7s">00</span><span class="lbl">sec</span></span>
+    </span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>8</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-8" id="c8">00:00:00</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>9</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-9" id="c9">00:00:00</span>
+  </div>
+</div>
+
+<div class="section">
+  <h2>10</h2>
+  <div class="bar">
+    <span class="server">🟢 Stato Server: Online</span>
+    <span class="clock-10">
+      <span id="c10h">00</span><span class="colon">:</span>
+      <span id="c10m">00</span><span class="colon">:</span>
+      <span id="c10s">00</span>
+    </span>
+  </div>
+</div>
+
+<script>
+function tick() {
+    const now = new Date();
+    const h = String(now.getHours())  .padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+
+    document.getElementById('c1').textContent = `${h}:${m}:${s}`;
+    document.getElementById('c2').textContent = `${h}:${m}:${s}`;
+    document.querySelector('.clock-3 .h').textContent = h;
+    document.querySelector('.clock-3 .m').textContent = m;
+    document.querySelector('.clock-3 .s').textContent = s;
+    document.getElementById('c4h').textContent = h;
+    document.getElementById('c4m').textContent = m;
+    document.getElementById('c4s').textContent = s;
+    document.getElementById('c5').textContent  = `${h}:${m}:${s}`;
+    document.getElementById('c6h').textContent = h;
+    document.getElementById('c6m').textContent = m;
+    document.getElementById('c6s').textContent = s;
+    document.getElementById('c7h').textContent = h;
+    document.getElementById('c7m').textContent = m;
+    document.getElementById('c7s').textContent = s;
+    document.getElementById('c8').textContent  = `${h}:${m}:${s}`;
+    document.getElementById('c9').textContent  = `${h}:${m}:${s}`;
+    document.getElementById('c10h').textContent = h;
+    document.getElementById('c10m').textContent = m;
+    document.getElementById('c10s').textContent = s;
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
